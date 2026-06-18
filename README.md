@@ -10,7 +10,7 @@ Uma aplicação de lista de tarefas (To-Do List) de tela única, moderna, focada
 
 ## 🚀 Demonstração
 
-▶️ **[Acesse a aplicação em execução aqui](https://thaistardys.github.io/daytrack-todo/)**
+▶️ **[Acesse a aplicação em execução aqui](https://thaistardys.github.io/treedo/)**
 
 ---
 
