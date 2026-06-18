@@ -4,42 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favico.ico">
-    <title>Tarefas</title>
-    <!-- Link para o arquivo CSS externo -->
+    <title>Tarefas do Dia</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Título Principal Dinâmico -->
-    <h1 id="mainTitle" class="main-title">Tarefas do dia --/--/----</h1>
+    <header>
+        <h1 id="mainTitle" class="main-title">Tarefas do dia --/--/----</h1>
+    </header>
 
-    <!-- Card Superior: Entrada de Dados -->
-    <div class="card">
-        <form id="todoForm" class="todo-form">
-            <input type="text" id="todoInput" class="todo-input" placeholder="Digite uma nova tarefa..." required>
-            <button type="submit" class="btn-add">Adicionar</button>
-        </form>
+    <main class="container">
+        <section class="card" aria-labelledby="form-title">
+            <h2 id="form-title" class="sr-only">Nova Tarefa</h2>
+            <form id="todoForm" class="todo-form">
+                <input type="text" id="todoInput" class="todo-input" placeholder="Digite uma nova tarefa..." required>
+                <button type="submit" class="btn btn-add">Adicionar</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h3>Pendentes</h3>
+            <ul id="todoList" class="todo-list"></ul>
+        </section>
+
+        <section class="card">
+            <div class="card-header-split">
+                <h3>Concluídas</h3>
+                <button id="btnExportPDF" class="btn btn-small btn-reload">📄 Exportar PDF</button>
+            </div>
+            <ul id="completedList" class="todo-list"></ul>
+        </section>
+
+        <section class="card list-deleted">
+            <h3>Excluídas</h3>
+            <ul id="deletedList" class="todo-list"></ul>
+        </section>
+    </main>
+
+    <!-- Modal de Edição de Subtarefas -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span id="closeEditModal" class="close-modal">&times;</span>
+            <h3>Editar Item</h3>
+            <div class="edit-group">
+                <label for="editTaskTitle">Nome da Categoria Principal:</label>
+                <input type="text" id="editTaskTitle">
+            </div>
+            <div class="edit-group">
+                <label>Subcategorias / Subtarefas:</label>
+                <div class="modal-subtask-row">
+                    <input type="text" id="modalSubtaskInput" placeholder="Nova subcategoria...">
+                    <button type="button" id="btnModalSubtaskAdd" class="btn btn-add">+</button>
+                </div>
+                <ul id="modalSubtasksList" class="modal-subtasks-list"></ul>
+            </div>
+            <button id="btnSaveModalChanges" class="btn btn-add save-modal-btn">Salvar Alterações</button>
+        </div>
     </div>
 
-    <!-- Card: Tarefas Pendentes -->
-    <div class="card">
-        <h3>Tarefas Pendentes</h3>
-        <ul id="todoList" class="todo-list"></ul>
+    <!-- Modal para Seleção de Datas do PDF -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span id="closePdfModal" class="close-modal">&times;</span>
+            <h3>Filtrar PDF por Período</h3>
+            <p class="modal-description">Escolha o intervalo de criação das tarefas. Deixe em branco para exportar todas.</p>
+            <div class="edit-group">
+                <label for="pdfStartDate">Data Inicial:</label>
+                <input type="date" id="pdfStartDate">
+            </div>
+            <div class="edit-group">
+                <label for="pdfEndDate">Data Final:</label>
+                <input type="date" id="pdfEndDate">
+            </div>
+            <div id="pdfModalAlert" class="modal-alert"></div>
+            <button id="btnProcessPdfExport" class="btn btn-add save-modal-btn">Gerar PDF</button>
+        </div>
     </div>
 
-    <!-- Card: Tarefas Concluídas -->
-    <div class="card">
-        <h3>Tarefas Concluídas</h3>
-        <ul id="completedList" class="todo-list"></ul>
-    </div>
-
-    <!-- Card: Tarefas Excluídas -->
-    <div class="card">
-        <h3>Tarefas Excluídas</h3>
-        <ul id="deletedList" class="todo-list"></ul>
-    </div>
-
-    <!-- Link para o arquivo JS externo -->
     <script src="script.js"></script>
 </body>
 </html>
